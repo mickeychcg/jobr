@@ -38,6 +38,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   user.associate = function(models) {
     // associations can be defined here
+    models.user.hasMany(models.job);
+
   };
   
   // Function to compare entered password to hashed password - instance methods

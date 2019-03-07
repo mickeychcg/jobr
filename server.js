@@ -6,6 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
+const request = require('request');
 require('dotenv').config();
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
@@ -48,6 +49,34 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/search', function(req, res) {
+  // render form for search
+});
+
+app.get('/results', function(req,res) {
+  // let apiUrl = `https://api.careeronestop.org/v1/jobsearch/${process .env.userid}/${req.query.keyword}/${req.query.location}/25/30/0/asc/1/20`
+  let apiUrl = `https://api.careeronestop.org/v1/jobsearch/${process.env.userid}/web%20developer/seattle%2C%20wa/25/30/0/0/1/20`
+  console.log(apiUrl)
+  request({
+    url: apiUrl,
+    headers: {
+      'Authorization': 'Bearer ' + process.env.APIToken,
+      'Content-Type': 'application/json' 
+    }
+  }, function(error, response, body) {
+    console.log("Error", error);
+    // console.log(response);
+    res.json(JSON.parse(body))
+    // let jobs = JSON.parse(body).jobsearch.v1.
+    // {userId}/{keyword}/{location}/{radius}/{sortColumns}/{sortOrder}/{startRecord}/{pageSize}/{days}; 
+    // res.render('/results', {keyword,location});
+  // route that get hit by form on /search
+  // use req.query with parameters from form
+  // use request() to hit api
+  // request takes an object 
+    });
+  });  
+
 app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
@@ -55,5 +84,6 @@ app.get('/profile', isLoggedIn, function(req, res) {
 app.use('/auth', require('./controllers/auth'));
 
 var server = app.listen(process.env.PORT || 3000);
+// console.log('Enviroment variables: ', process.env);
 
 module.exports = server;
