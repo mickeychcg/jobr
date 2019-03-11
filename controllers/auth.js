@@ -36,16 +36,16 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/', 
+  successRedirect: '/search', 
   successFlash: 'You have logged in!', 
   failureRedirect: '/auth/login',
   failureFlash: 'Invalid username and/or password'
 }));
 
-router.get('/logout', function(req, res) {
+router.get('/', function(req, res) {
   req.logout();
   req.flash('success', 'You have logged out!');
-  res.redirect('/');
+  res.redirect('auth/login');
 });
 
 

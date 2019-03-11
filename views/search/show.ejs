@@ -1,0 +1,18 @@
+    <h1>These are the current job listings for <%= keyword %> in <%= location %> </h1><br>
+    <% jobs.forEach(function (job) { %>
+      <h2>
+        <p><%= job.JobTitle %></p>
+        <p>Company: <%= job.Company %></p>
+      </h2>
+      <h3>
+        <p>Posted on: <%= job.AccquisitionDate %></p>
+      </h3>
+      <form action='/main' method='POST'>
+        <input type="hidden" name="jobTitle" value="<%= job.JobTitle %>">
+        <input type="hidden" name="company" value="<%= job.Company %>">
+        <input type="hidden" name="url" value="<%= job.URL %>">
+        <input type="hidden" name="postingDate" value="<%= job.AccquisitionDate %>">
+        <input type="submit" value="Select">
+      </form>
+  <% }) %>
+  </div>

@@ -1,0 +1,18 @@
+<h2>These are my jobs</h2>
+<% jobs.forEach(function(job) { %>
+  <h3><%= job.jobTitle %></h3>
+  <h3>Company: <%= job.company %></h3>
+  <div class="taskBox">
+    <p>Status <%= job.jobDescription %></p>
+  </div>
+  <form method="POST" action="/main/<%= job.id %>?_method=PUT ">
+    <input type="hidden" name="jobId" value="<%= job.id %>">
+    <textarea rows="6" cols="100" type="text" name="notes" placeholder="Enter notes about your job here"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+  <form method="POST" action="/main/<%= job.id %>?_method=DELETE">
+    <button type="submit" name="Delete Job">Delete</button>
+  </form>
+
+<% }); %>
+

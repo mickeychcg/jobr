@@ -1,3 +1,4 @@
+<h3>Sign in</h3>
 <form action="/auth/login" method="POST">
   <div class="form-group">
     <label for="authEmail">Email</label>
@@ -8,6 +9,14 @@
     <label for="authPassword">Password</label>
     <input id="authPassword" class="form-control" type="password" name="password">
   </div>
-
   <input class="btn btn-primary" type="submit">
 </form>
+<br>
+<h3>No login? No problem!</h3>
+<div class="form-group">
+  <div class="row align-items-end">
+  <form action="/auth/signup" method-="POST"><br>
+    </div>
+      <input class="btn-primary btn-lg btn-block" type="submit" value="Click here to create an account!">
+  </form>
+</div>
